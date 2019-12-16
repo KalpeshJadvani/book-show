@@ -1,71 +1,47 @@
 import React from 'react';
-import { Layout, Button, Table, Divider } from 'antd';
-
-const { Content } = Layout;
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name'
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <anchor style={{ color: '#1890ff' }}>Edite</anchor>
-        <Divider type="vertical" />
-        <anchor style={{ color: '#1890ff' }}>Delete</anchor>
-      </span>
-    )
-  }
-];
-
+import { PageHeader, Tabs } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import allActions from '../actions/index';
+import Containor from '../components/ContentLayout';
+const { TabPane } = Tabs;
 const data = [];
-for (let i = 1; i <= 10; i++) {
-  data.push({
-    key: i,
-    name: 'John Brown'
-  });
-}
 
 const ContentLayout = () => {
-  const handleToggle = prop => enable => {
-    this.setState({ [prop]: enable });
+  const tabsSelected = useSelector(state => state.tabs);
+  const dispatch = useDispatch();
+  const handleClick = tab => {
+    const seletcedTab = tab === '1' ? 'todos' : 'users';
+    dispatch(allActions.Tabs(seletcedTab));
+  };
+  console.log('tabsSelected', tabsSelected);
+  if (tabsSelected === 'todos') {
+    for (let i = 1; i <= 10; i++) {
+      data.push({
+        key: i,
+        name: 'John Brown'
+      });
+    }
+  }
+
+  const Obj = {
+    tabsSelected,
+    data
   };
 
-  const handleDataChange = hasData => {
-    this.setState({ hasData });
-  };
-
-  //  this.handleToggle('loading')
-  //  this.handleDataChange  If no data then it will show
-
-  const config = {
-    loading: false,
-    pagination: { position: 'bottom' },
-    ellipsis: true,
-    scroll: { y: 440 },
-    hasData: true
-  };
   return (
-    <Content>
-      <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-        <Button title="Create User">Create User</Button>
-        <div>
-          <br />
-        </div>
-        <Table
-          {...config}
-          columns={columns.map(item => ({
-            ...item,
-            ellipsis: config.ellipsis
-          }))}
-          dataSource={config.hasData ? data : null}
-        />
-      </div>
-    </Content>
+    <React.Fragment>
+      <PageHeader style={{ padding: '0 0px' }}>
+        <br /> <br />
+        <Tabs defaultActiveKey="1" onChange={handleClick}>
+          <TabPane tab="Todos" key="1">
+            <Containor Obj={Obj} />
+          </TabPane>
+          <TabPane tab="User" key="2">
+            <Containor Obj={Obj} />
+          </TabPane>
+        </Tabs>
+      </PageHeader>
+    </React.Fragment>
   );
 };
 

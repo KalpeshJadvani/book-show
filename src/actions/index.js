@@ -1,22 +1,31 @@
-export function sendUserData(userData) {
+const sendUserData = userData => {
   console.log('data', userData);
   return { type: 'ADD_USER_DATA', payload: userData };
-}
+};
 
-export function deleteUser(indexById) {
+const deleteUser = indexById => {
   return { type: 'DELETE_USER_DATA', payload: indexById };
-}
+};
 
-export function editUserData(updatedData, indexById) {
+const editUserData = (updatedData, indexById) => {
   return {
     type: 'UPDATE_USER_DATA',
     payload: { data: updatedData, id: indexById }
   };
-}
+};
 
-export function tabs(current) {
+const Tabs = current => {
+  console.log('action payload', current);
   return {
     type: 'TABS',
     payload: { tabs: current }
   };
-}
+};
+const allActions = {
+  Tabs,
+  editUserData,
+  deleteUser,
+  sendUserData
+};
+
+export default allActions;

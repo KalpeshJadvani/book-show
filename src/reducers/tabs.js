@@ -1,4 +1,5 @@
 const tabsReducers = (state = { tabs: 'user' }, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case 'TABS':
       return {

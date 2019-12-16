@@ -1,29 +1,35 @@
-import React, { useReducer } from 'react';
-//import { useSelector } from 'react-redux';
-import { Menu, Icon, PageHeader } from 'antd';
-import reducer from '../reducers';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Menu, Icon, PageHeader, Tabs } from 'antd';
+import allActions from '../actions/index';
+const { TabPane } = Tabs;
 
 const TopLayout = () => {
-  const [state, dispatch] = useReducer(reducer, { tabs: 'user' });
+  const tabsSelected = useSelector(state => state.tabs);
+  const dispatch = useDispatch();
   const handleClick = e => {
-    console.log('handleClick ', e.key);
-    dispatch({ type: 'tabs', payload: e.key });
+    dispatch(allActions.Tabs(e.key));
   };
-  console.log('click ', state.tabs);
+
+  // useEffect(() => {
+  //   dispatch(allActions.Tabs('todos'));
+  // });
+  console.log('click ', tabsSelected);
 
   return (
     <PageHeader style={{ padding: '0 0px' }}>
       <br /> <br />
-      <Menu onClick={handleClick} selectedKeys={[state.tabs]} mode="horizontal">
-        <Menu.Item key="todos">
-          <Icon type="appstore" />
-          Todos
-        </Menu.Item>
-        <Menu.Item key="user">
-          <Icon type="user" />
-          Users
-        </Menu.Item>
-      </Menu>
+      <Tabs defaultActiveKey="1" onChange={handleClick}>
+        <TabPane tab="Tab 1" key="1">
+          Content of Tab Pane 1
+        </TabPane>
+        <TabPane tab="Tab 2" key="2">
+          Content of Tab Pane 2
+        </TabPane>
+        <TabPane tab="Tab 3" key="3">
+          Content of Tab Pane 3
+        </TabPane>
+      </Tabs>
     </PageHeader>
   );
 };

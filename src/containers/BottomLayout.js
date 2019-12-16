@@ -4,7 +4,7 @@ const { Footer } = Layout;
 const BottomLayout = () => {
   return (
     <Footer style={{ textAlign: 'center' }}>
-      Ant Design ©2018 Created by Ant UED
+      This Design ©2019 Created by Kalpesj Jadvani
     </Footer>
   );
 };
