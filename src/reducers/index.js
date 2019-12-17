@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
-import users from './users';
+import users from './Users';
+import tabs from './Tabs';
 
-import empData from './emp';
-import tabs from './tabs';
-
-const rootReducer = combineReducers({ empData, users, tabs });
+const rootReducer = combineReducers({ users, tabs });
 
 export default rootReducer;

@@ -6,20 +6,15 @@ const userReducers = (state = { user: [] }, action) => {
 
     case 'UPDATE_USER_DATA':
       const currentUserToUpdate = [...state.user];
-
-      const indexToDelete = currentUserToUpdate.findIndex(function(
-        user,
-        index
-      ) {
-        return index === action.payload.id;
-      });
+      let indexToDelete = currentUserToUpdate.findIndex(
+        x => x.key === action.payload.id
+      );
 
       const newuserToUpdate = {
+        key: action.payload.data.key,
         name: action.payload.data.name,
         email: action.payload.data.email
       };
-
-      console.log('newuserToUpdate', newuserToUpdate);
 
       return {
         user: [
@@ -30,16 +25,12 @@ const userReducers = (state = { user: [] }, action) => {
       };
 
     case 'DELETE_USER_DATA':
+      let index = state.user.findIndex(x => x.id === action.payload);
+      state.user.splice(index, 1);
       return {
-        user: [
-          ...state.user.slice(0, action.payload),
-          ...state.user.slice(action.payload + 1)
-        ]
+        user: state.user
       };
-    case 'TABS':
-      return {
-        tabs: action.payload
-      };
+
     default:
       return state;
   }

@@ -1,5 +1,4 @@
 const sendUserData = userData => {
-  console.log('data', userData);
   return { type: 'ADD_USER_DATA', payload: userData };
 };
 
@@ -15,10 +14,9 @@ const editUserData = (updatedData, indexById) => {
 };
 
 const Tabs = current => {
-  console.log('action payload', current);
   return {
     type: 'TABS',
-    payload: { tabs: current }
+    payload: current
   };
 };
 const allActions = {

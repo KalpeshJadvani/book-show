@@ -1,14 +1,12 @@
 import React from 'react';
 
-// import TopLayout from './TopLayout';
 import BottomLayout from './BottomLayout';
-import ContentLayout from './ContentLayout';
+import TopLayout from './TopLayout';
 import { Layout } from 'antd';
 const App = () => (
   <Layout className="layout" style={{ padding: '0 50px' }}>
-    {/* <TopLayout /> */}
     <Layout>
-      <ContentLayout />
+      <TopLayout />
     </Layout>
     <BottomLayout />
   </Layout>
